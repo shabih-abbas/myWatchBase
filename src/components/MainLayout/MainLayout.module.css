@@ -1,0 +1,33 @@
+header.mainLayout {
+    min-height: 50px;
+    max-height: 100px;
+    height: 20vh;
+    padding: 10px clamp(10px, 5vw, 100px);
+    background-image: linear-gradient(to bottom, #121212 80%, #222);
+    position: sticky;
+}
+.mainLayout nav{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.mainLayout nav > a{
+    height: 100%;
+}
+.mainLayout img{
+    height: 95%;
+}
+.mainLayout menu > a{
+    text-decoration: none;
+    margin: 5px;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #C0C0C0;
+    padding: 5px;
+}
+.mainLayout menu > a:hover{
+    text-decoration: none;
+    border: 2px solid #C0C0C0;
+    border-radius: 5px;
+}
