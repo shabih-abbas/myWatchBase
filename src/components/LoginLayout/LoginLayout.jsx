@@ -9,6 +9,7 @@ export default function LoginLayout(){
                 <nav>
                     <Link to="/"><img src={logo} alt="logo" /></Link>
                 </nav>
+                <p>Let's find your next great watch!</p>
             </header>
             <Outlet/>
         </>
