@@ -1,0 +1,23 @@
+/* div.container{
+    position: relative;
+} */
+div.loader{
+    width: 0vw;
+    height: 5px;
+    background-color: #E50914;
+    position: fixed;
+    top: 0;
+    left: 0;
+    animation: loading 5s linear;
+}
+@keyframes loading {
+    50%{
+        width: 75vw;
+    }
+    75%{
+        width: 85vw;
+    }
+    100%{
+        width: 98vw;
+    }
+}
