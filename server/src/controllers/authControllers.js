@@ -9,11 +9,11 @@ export async function register(req, res){
         const exists = await User.findOne({email});
         if(exists) {
             console.log(exists)
-            return res.status(400).json({message: "user already exists"+ exists.email + exists._id});
+            return res.status(400).json({message: "User Already Exists"});
         }
         const hash = await bcrypt.hash(password, 10)
         const user = await User.create({email, password: hash, collections: []})
-        res.status(201).json({message: "user created", id: user._id})
+        res.status(201).json({message: "User Created", id: user._id})
     }
     catch(err){
         res.status(500).json({message: err.message})
@@ -25,18 +25,18 @@ export async function login(req, res){
 
     try{
         const user = await User.findOne({email})
-        if(!user) return res.status(400).json({message: "invalid credentials"})
+        if(!user) return res.status(400).json({message: "Invalid Credentials"})
         const match = await bcrypt.compare(password, user.password)
-        if(!match) return res.status(400).json({message: "invalid password"})
+        if(!match) return res.status(400).json({message: "Invalid Password"})
         
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: '1d'});
         res.cookie("token", token, {
             httpOnly: true,
             secure: false,
-            sameSite: 'lax',
+            sameSite: 'none',
             maxAge: 24 * 60 * 60 * 1000
         })
-        res.json({message: 'login success', user: user._id})
+        res.json({message: 'Login Success', user: user._id})
     }
     catch(err){
         res.status(500).json({message: err.message})
@@ -52,16 +52,16 @@ export function authenticate(req, res){
         res.cookie("token", token, {
             httpOnly: true,
             secure: false,
-            sameSite: 'lax',
+            sameSite: 'none',
             maxAge: 24 * 60 * 60 * 1000,
         })
         res.status(200).json({user: decoded.id});
     }
     catch(err){
-        res.status(403).json({message: "token expired or invalid"});
+        res.status(403).json({message: "Token Expired or Invalid"});
     }
 }
 export function logout(req, res){
     res.clearCookie("token");
-    res.json({message: "logout success"})
+    res.json({message: "Logout Success"})
 }

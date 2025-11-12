@@ -5,6 +5,8 @@ header.mainLayout {
     padding: 10px clamp(10px, 5vw, 100px);
     background-image: linear-gradient(to bottom, #121212 80%, #222);
     position: sticky;
+    top: 0px;
+    z-index: 1000;
 }
 .mainLayout nav{
     height: 100%;
@@ -18,16 +20,22 @@ header.mainLayout {
 .mainLayout img{
     height: 95%;
 }
+.mainLayout menu{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    gap: 25px;
+}
 .mainLayout menu > a{
     text-decoration: none;
-    margin: 5px;
-    font-size: 1.2em;
-    font-weight: 500;
     color: #C0C0C0;
-    padding: 5px;
 }
 .mainLayout menu > a:hover{
     text-decoration: none;
-    border: 2px solid #C0C0C0;
-    border-radius: 5px;
+    transform: scale(120%);
+}
+.mainLayout .icon{
+    font-size: 30px;
 }

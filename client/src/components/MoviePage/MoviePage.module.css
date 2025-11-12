@@ -1,0 +1,92 @@
+.container{
+    position: relative;
+    width: 100vw;
+    padding: 20px 0; 
+}
+.backdropCtn{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1000;
+}
+.backdrop{
+    width: 100%;
+}
+.backdropOverlay{
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0,0.7),10%, #121212);
+    background-size: cover;
+}
+.movie{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    min-width: 300px;
+    max-width: 600px;
+    margin: auto;
+    gap: 20px;
+    align-items: center;
+}
+.poster{
+    width: 50%;
+}
+.genrelist{
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+    gap: 10px;
+}
+.genre{
+    background-color: #E50914;
+    padding: 3px;
+    border-radius: 3px;
+}
+.ratinglist{
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.rating{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.rating img{
+    width: 50px;
+    vertical-align: center;
+}
+.back{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: transparent;
+    border: none;
+    color: #C0C0C0;
+    font-size: 18px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.backarrow{
+    font-size: 30px;
+    margin-right: 2px;
+}
+.back:hover{
+    transform: scale(110%);
+}
+@media screen and (min-width:768px) {
+    .movie{
+        flex-direction: row;
+        min-width: 600px;
+        max-width: 1000px;
+    }
+    .poster{
+        width: 30%;
+    } 
+}

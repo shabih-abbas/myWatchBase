@@ -1,0 +1,53 @@
+.movie{
+    padding: 10px;
+    background-color: #222;
+    color: #C0C0C0;
+    border-radius: 20px;
+    width: 20vw;
+    min-width: 150px;
+    max-width: 400px;
+    cursor: pointer;
+}
+.posterCtn{
+    width: 100%;
+    position: relative;
+}
+.posterCtn img{
+    width: 100%;
+    border-radius: 5% 5% 0 0;
+}
+.ratingOverlay{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: rgba(0,0,0,0.8);
+    opacity: 0;
+    border-radius: 5% 5% 0 0;
+}
+.ratingOverlay:hover{
+    opacity: 1;
+}
+.movie h3{
+    font-size: clamp(20px, 30%, 30px);
+    margin: 2px 0;
+}
+.movie p{
+    /* font-size: 12px; */
+    margin: 0;
+}
+.movie:hover{
+    transform: scale(105%);
+}
+a{
+    text-decoration: none;
+}
+.details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

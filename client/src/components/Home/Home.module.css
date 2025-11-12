@@ -1,0 +1,12 @@
+.container{
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.heading{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: clamp(20px, 5vw, 30px);
+}

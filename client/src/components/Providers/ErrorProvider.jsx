@@ -8,7 +8,7 @@ export function ErrorProvider({children}){
 
     return (
         <ErrorContext.Provider value= {{error, setError}}>
-            {error ? <Error message={error} /> : null}
+            {error ? <Error message={error} closeHandler={() => setError(null)} /> : null}
             {children}
         </ErrorContext.Provider>
     )

@@ -1,0 +1,26 @@
+.container{
+    /* position: relative; */
+    font-size: 18px;
+    display: flex;
+    gap: 2px;
+    font-weight: bold;
+    align-items: center;
+}
+.star{
+    position: relative;
+}
+.filled{
+    color: #E50914;
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;   
+    overflow: hidden;
+}
+.unfilled{
+    /* color: #121212; */
+}
+.filled, .unfilled{
+    margin: 0;
+    /* font-size: 25px; */
+}

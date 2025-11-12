@@ -1,0 +1,36 @@
+.container{
+    position: relative;
+    color: #C0C0C0;
+    /* outline: 1px solid */
+}
+.profile{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+.icon{
+    font-size: 30px;
+    color: #C0C0C0;
+    cursor: pointer;
+}
+.dropdown{
+    position: absolute;
+    bottom: -100px;
+    /* right: 0px; */
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    /* outline: 1px solid */
+}
+.dropdown button{
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+}
+.icon:hover{
+    transform: scale(120%);
+}

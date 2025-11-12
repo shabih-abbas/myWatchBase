@@ -5,8 +5,10 @@ import { AuthProvider } from '../Providers/AuthProvider';
 import { ErrorProvider } from '../Providers/ErrorProvider';
 import MainLayout from '../MainLayout/MainLayout';
 import LoginLayout from '../LoginLayout/LoginLayout';
+import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import MoviePage from '../MoviePage/MoviePage';
 
 function App() {
   return (
@@ -16,7 +18,8 @@ function App() {
           <AuthProvider>
             <Routes>
               <Route element={<MainLayout />}>
-                <Route path='/' />
+                <Route index element={<Home />}/>
+                <Route path='movie/:id' element={<MoviePage />}/>
                 <Route path='browse' />
               </Route>
               <Route element={<LoginLayout />}>
