@@ -1,0 +1,15 @@
+.container{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+}
+.loader{
+   font-size: 10vw;
+   animation: loading 550ms linear 0s infinite;
+}
+@keyframes loading{
+    100%{
+        transform: rotate(360deg);
+    }
+}

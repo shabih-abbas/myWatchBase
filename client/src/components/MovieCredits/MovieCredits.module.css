@@ -1,0 +1,55 @@
+.credits{
+    /* padding: 20px; */
+    width: 100vw;
+}
+.crewListCtn{
+    width: 100%;
+}
+.crewList{
+    list-style-type: none;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: auto;
+    gap: 10px;
+    padding: 0;
+    /* justify-content: center; */
+    width: 80%;  
+    margin: auto;  
+}
+.crewList::-webkit-scrollbar{
+    height: 5px;
+    background-color: #C0C0C0;
+    
+}
+/* .crewList::-webkit-scrollbar-track-piece{
+    background-color: #222;
+    border-radius: 5px;
+} */
+.crewList::-webkit-scrollbar-thumb{
+    background-color: #E50914;
+}
+.profile{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 70px;
+    align-items: center;
+}
+.profileImg{
+    width: 60px;
+    border-radius: 100%;
+    aspect-ratio: 1/1;
+}
+.name{
+    font-size: 15px;
+    font-weight: 500;
+    margin: 5px 0px 2px;
+}
+.character{
+    font-size: 10px;
+    margin: 0;
+}
+.typeHeading{
+    text-align: center;
+    text-transform: uppercase;
+}

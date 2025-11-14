@@ -2,18 +2,24 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { useError } from "../Providers/ErrorProvider";
 import { formatDate } from "../../utiles";
+import Buffering from "../Buffering/Buffering";
+import MovieCredits from "../MovieCredits/MovieCredits";
+import MovieList from "../MovieList/MovieList";
 import styles from "./MoviePage.module.css";
 import imdb from "../../assets/imdb.png";
 import rottenTomatoes from "../../assets/rotten_tomatoes.png";
 import metaCritic from "../../assets/metacritic.png";
+import tmdb from "../../assets/tmdb.png";
+
 
 export default function MoviePage() {
   const [movie, setMovie] = useState(null);
-  const params = useParams();
+  const {id} = useParams();
   const { setError } = useError();
   const baseImgUrl = "https://image.tmdb.org/t/p/";
   useEffect(() => {
     async function getMovie(id) {
+      setMovie(null);
       setError(null);
       try {
         const res = await fetch(`/api/movies/movie?id=${id}`);
@@ -28,8 +34,8 @@ export default function MoviePage() {
         console.warn("Error in fetching movie details ", err);
       }
     }
-    getMovie(params.id);
-  }, []);
+    getMovie(id);
+  }, [id]);
   const ratingLogos = {
     "Internet Movie Database": imdb,
     "Rotten Tomatoes": rottenTomatoes,
@@ -37,15 +43,15 @@ export default function MoviePage() {
   };
   return (
     <main className={styles.container}>
+      <Back />
       {movie == null ? (
-        "Loading..."
+        <Buffering />
       ) : (
         <>
-          <Back />
           <div className={styles.backdropCtn}>
             <img
               className={styles.backdrop}
-              src={`${baseImgUrl}w780/${movie.backdrop_path}`}
+              src={`${baseImgUrl}w780/${movie.backdrop}`}
               alt={movie.title + " backdrop"}
             />
             <div className={styles.backdropOverlay}></div>
@@ -53,12 +59,12 @@ export default function MoviePage() {
           <div className={styles.movie}>
             <img
               className={styles.poster}
-              src={`${baseImgUrl}w500/${movie.poster_path}`}
+              src={`${baseImgUrl}w500/${movie.poster}`}
               alt=""
             />
             <div className={styles.details}>
               <h1>{movie.title}</h1>
-              <p>{formatDate(movie.release_date)}</p>
+              <p>{formatDate(movie.releaseDate)}</p>
               <ul className={styles.genrelist}>
                 {movie.genres.map((genre) => (
                   <li className={styles.genre} key={genre.id}>
@@ -66,22 +72,35 @@ export default function MoviePage() {
                   </li>
                 ))}
               </ul>
-              <p>{movie.overview}</p>
-              {movie.ratings ? (
-                <ul className={styles.ratinglist}>
-                  {movie.ratings.map((rating) => (
-                    <li className={styles.rating}>
-                      <img
-                        src={ratingLogos[rating.Source]}
-                        alt={ratingLogos[rating.Source]}
-                      />
-                      <span>{rating.Value}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
+              <p>{movie.synopsis}</p>
+              <p>{`Runtime: ${movie.runtime} mins`}</p>
+              <p>{`Languages: ${movie.languages.join(", ")}`}</p>
+              <ul className={styles.ratinglist}>
+                <li className={styles.rating}>
+                  <img src={tmdb} alt="tmdb" />
+                  <span>{Math.round(movie.rating * 10) / 10}</span>
+                </li>
+                {movie.externalRatings
+                  ? movie.externalRatings.map((rating) => (
+                      <li className={styles.rating}>
+                        <img
+                          src={ratingLogos[rating.Source]}
+                          alt={rating.Source}
+                        />
+                        <span>{rating.Value}</span>
+                      </li>
+                    ))
+                  : null}
+              </ul>
             </div>
           </div>
+          <MovieCredits
+            actors={movie.credits.actors}
+            directors={movie.credits.directors}
+            writers={movie.credits.writers}
+          />
+          <h2 className={styles.similarHeading}>Similar Movies</h2>
+          <MovieList movies={movie.similar} />
         </>
       )}
     </main>

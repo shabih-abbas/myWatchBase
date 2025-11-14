@@ -19,12 +19,12 @@ function App() {
             <Routes>
               <Route element={<MainLayout />}>
                 <Route index element={<Home />}/>
-                <Route path='movie/:id' element={<MoviePage />}/>
+                <Route path='/movie/:id' element={<MoviePage />}/>
                 <Route path='browse' />
               </Route>
               <Route element={<LoginLayout />}>
-                <Route path='login' element={<Login />}/>
-                <Route path='register' element={<Register />}/>
+                <Route path='/login' element={<Login />}/>
+                <Route path='/register' element={<Register />}/>
               </Route>
             </Routes>
           </AuthProvider>

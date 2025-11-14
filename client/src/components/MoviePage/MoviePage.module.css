@@ -50,7 +50,7 @@
     list-style-type: none;
     padding: 0;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 20px;
 }
 .rating{
@@ -60,7 +60,6 @@
 }
 .rating img{
     width: 50px;
-    vertical-align: center;
 }
 .back{
     position: absolute;
@@ -69,16 +68,19 @@
     background-color: transparent;
     border: none;
     color: #C0C0C0;
-    font-size: 18px;
+    font-size: 15px;
     text-transform: uppercase;
     cursor: pointer;
 }
 .backarrow{
-    font-size: 30px;
+    font-size: 25px;
     margin-right: 2px;
 }
 .back:hover{
     transform: scale(110%);
+}
+.similarHeading{
+    text-align: center;
 }
 @media screen and (min-width:768px) {
     .movie{

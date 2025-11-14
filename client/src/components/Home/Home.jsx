@@ -1,11 +1,10 @@
 import {useState, useEffect} from 'react';
-import { Link } from 'react-router';
 import {useError} from '../Providers/ErrorProvider';
 import styles from './Home.module.css';
-import Movie from '../Movie/Movie';
-
+import MovieList from '../MovieList/MovieList';
+import Buffering from '../Buffering/Buffering';
 export default function Home(){
-    const [trending, setTrending] = useState([]);
+    const [trending, setTrending] = useState(null);
     const {setError} = useError();
     useEffect(()=>{
         async function fetchTrending(){
@@ -31,14 +30,11 @@ export default function Home(){
     return (
         <>
             <h2 className={styles.heading}>Trending this week</h2>
-            <div className={styles.container}>
-                
-                {
-                    trending.map(movie=>(
-                        <Movie movie={movie} key={movie.id}/>
-                    ))
-                }
-            </div>
+            { trending ? 
+                <MovieList movies={trending} />
+                :
+                <Buffering />
+            }
         </>
     );
 }
