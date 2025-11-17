@@ -1,0 +1,67 @@
+.container{
+    position: relative;
+}
+.container button{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    
+}
+.icon{
+    color: #C0C0C0;
+    font-size: 30px;
+    cursor: pointer;
+}
+.iconSm{
+    color: #E50914;
+    font-size: 15px;
+    cursor: pointer;
+}
+.container button:disabled .iconSm{
+    cursor: not-allowed;
+}
+.searchBarCtn{
+    position: fixed;
+    top: 10px;
+    width: 100vw;
+}
+.searchBar{
+    width: 50%;
+    margin: auto;
+    display: flex;
+    animation: appear 1s ease-in-out;
+}
+.search{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-grow: 1;
+    background-color: #C0C0C0;
+    border-radius: 5px;
+}
+.input{
+    background-color: transparent;
+    border: none;
+    flex-grow: 1;
+    padding: 5px;
+    font-size: 15px;
+}
+.input:focus{
+    /* border: none; */
+    outline: none;
+    box-shadow: 0 0 .4rem #E50914;
+}
+.expolre{
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
+@keyframes appear{
+    from{
+        transform: scaleX(0%);
+    }
+    to{
+        transform: scaleX(100%);
+    }
+}

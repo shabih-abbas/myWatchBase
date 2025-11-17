@@ -9,6 +9,7 @@ import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import MoviePage from '../MoviePage/MoviePage';
+import Search from '../Search/Search';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route element={<MainLayout />}>
                 <Route index element={<Home />}/>
                 <Route path='/movie/:id' element={<MoviePage />}/>
+                <Route path='/search/:query' element={<Search />}/>
                 <Route path='browse' />
               </Route>
               <Route element={<LoginLayout />}>

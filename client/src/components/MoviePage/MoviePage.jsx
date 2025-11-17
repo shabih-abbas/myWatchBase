@@ -74,7 +74,7 @@ export default function MoviePage() {
               </ul>
               <p>{movie.synopsis}</p>
               <p>{`Runtime: ${movie.runtime} mins`}</p>
-              <p>{`Languages: ${movie.languages.join(", ")}`}</p>
+              <p>{`Language${movie.languages.length > 1 ? 's': ''}: ${movie.languages.join(", ")}`}</p>
               <ul className={styles.ratinglist}>
                 <li className={styles.rating}>
                   <img src={tmdb} alt="tmdb" />

@@ -64,7 +64,32 @@ export async function movie(req, res) {
     return res.status(500).json({ message: err.message });
   }
 }
-
+export async function search(req, res){
+  const {query} = req.query;
+  try{
+    const tmdbRes = await fetch(
+      `${process.env.TMDB_BASE_URL}/search/movie?query=${query}`,
+      {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: "Bearer " + process.env.TMDB_KEY,
+        },
+      }
+    );
+    if (tmdbRes.ok){
+      const data = await tmdbRes.json();
+      const movies = data.results.map(trimMovie);
+      return res.status(200).json({movies});
+    }
+    else{
+      return res.status(502).json({ message: "Error with TMDB fetch" });
+    }
+  }
+  catch(err){
+    return res.status(500).json({message: err});
+  }
+}
 function trimMovieDetails(details) {
   return {
     id: details.id,

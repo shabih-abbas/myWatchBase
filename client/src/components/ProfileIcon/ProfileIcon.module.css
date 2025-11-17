@@ -34,3 +34,6 @@
 .icon:hover{
     transform: scale(120%);
 }
+.link{
+    text-decoration: none;
+}

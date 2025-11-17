@@ -17,9 +17,6 @@
     white-space: nowrap;   
     overflow: hidden;
 }
-.unfilled{
-    /* color: #121212; */
-}
 .filled, .unfilled{
     margin: 0;
     /* font-size: 25px; */
