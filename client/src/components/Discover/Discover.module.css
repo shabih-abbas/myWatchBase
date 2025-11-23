@@ -1,0 +1,18 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.filters{
+    display: flex;
+    justify-content: center;
+}
+.select{
+    background-color: #C0C0C0;
+    padding: 5px;
+    color: #E50914;
+}
+.select:focus{
+    outline: none;
+    border: none;
+}

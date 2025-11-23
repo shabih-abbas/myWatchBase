@@ -8,11 +8,7 @@
     border: none;
     padding: 0;
 }
-.icon{
-    font-size: 30px;
-    color: #C0C0C0;
-    cursor: pointer;
-}
+
 .dropdown{
     position: absolute;
     bottom: -100px;
@@ -30,10 +26,4 @@
     background-color: transparent;
     border: none;
     padding: 0px;
-}
-.icon:hover{
-    transform: scale(120%);
-}
-.link{
-    text-decoration: none;
 }

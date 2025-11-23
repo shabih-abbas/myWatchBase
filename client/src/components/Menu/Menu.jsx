@@ -7,7 +7,7 @@ export default function Menu(){
     return (
         <menu className={styles.menu}>
             <SearchBar />
-            <Link className={styles.explore}>
+            <Link to='/discover' className={styles.explore}>
                 <MdOutlineExplore aria-label="explore" className={styles.icon} />
             </Link>
             <ProfileIcon />

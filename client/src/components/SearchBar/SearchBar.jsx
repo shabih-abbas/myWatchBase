@@ -6,7 +6,7 @@ export default function SearchBar() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   return (
-    <form className={styles.search} action={() => navigate(`/search/${query}`)}>
+    <form className={styles.search} action={() => navigate(`/search?query=${query}&page=1`)}>
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}

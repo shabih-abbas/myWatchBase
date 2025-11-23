@@ -39,11 +39,10 @@ header.mainLayout {
     text-decoration: none;
     transform: scale(120%);
 } */
-.mainLayout .icon{
-    font-size: 30px;
-}
+
 @media screen and (min-width: 768px) {
     .mainLayout nav{
         justify-content: space-between;
+        
     }
 }

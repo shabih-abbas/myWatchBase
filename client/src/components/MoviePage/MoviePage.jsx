@@ -11,10 +11,9 @@ import rottenTomatoes from "../../assets/rotten_tomatoes.png";
 import metaCritic from "../../assets/metacritic.png";
 import tmdb from "../../assets/tmdb.png";
 
-
 export default function MoviePage() {
   const [movie, setMovie] = useState(null);
-  const {id} = useParams();
+  const { id } = useParams();
   const { setError } = useError();
   const baseImgUrl = "https://image.tmdb.org/t/p/";
   useEffect(() => {
@@ -74,7 +73,9 @@ export default function MoviePage() {
               </ul>
               <p>{movie.synopsis}</p>
               <p>{`Runtime: ${movie.runtime} mins`}</p>
-              <p>{`Language${movie.languages.length > 1 ? 's': ''}: ${movie.languages.join(", ")}`}</p>
+              <p>{`Language${
+                movie.languages.length > 1 ? "s" : ""
+              }: ${movie.languages.join(", ")}`}</p>
               <ul className={styles.ratinglist}>
                 <li className={styles.rating}>
                   <img src={tmdb} alt="tmdb" />

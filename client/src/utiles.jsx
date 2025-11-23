@@ -12,10 +12,6 @@ export function Img({ path, alt, className, size }) {
       className={className}
       src={path ? baseImgUrl +'/'+ size + path: fallback}
       alt={alt}
-      onError={() => {
-        this.onError = null;
-        this.src = './assets/fallback.png'
-      }}
     />
   );
 }

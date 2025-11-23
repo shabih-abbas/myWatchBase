@@ -65,10 +65,10 @@ export async function movie(req, res) {
   }
 }
 export async function search(req, res){
-  const {query} = req.query;
+  const {query, page} = req.query;
   try{
     const tmdbRes = await fetch(
-      `${process.env.TMDB_BASE_URL}/search/movie?query=${query}`,
+      `${process.env.TMDB_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&page=${page}`,
       {
         method: "GET",
         headers: {
@@ -80,7 +80,7 @@ export async function search(req, res){
     if (tmdbRes.ok){
       const data = await tmdbRes.json();
       const movies = data.results.map(trimMovie);
-      return res.status(200).json({movies});
+      return res.status(200).json({movies, currentPage: data.page, totalPages: data.total_pages});
     }
     else{
       return res.status(502).json({ message: "Error with TMDB fetch" });
@@ -88,6 +88,80 @@ export async function search(req, res){
   }
   catch(err){
     return res.status(500).json({message: err});
+  }
+}
+export async function languages(req, res){
+  try{
+    const tmdbRes = await fetch(
+      `${process.env.TMDB_BASE_URL}/configuration/languages`,
+      {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: "Bearer " + process.env.TMDB_KEY,
+        },
+      }
+    );
+    if(tmdbRes.ok){
+      const data = await tmdbRes.json();
+      return res.status(200).json({languages: data});
+    }
+    else{
+      return res.status(502).json({ message: "Error with TMDB fetch" });
+    }
+  }
+  catch(err){
+    return res.status(500).json({message: err});
+  }
+}
+export async function genres(req, res){
+  try{
+    const tmdbRes = await fetch(
+      `${process.env.TMDB_BASE_URL}/genre/movie/list`,
+      {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: "Bearer " + process.env.TMDB_KEY,
+        },
+      }
+    );
+    if(tmdbRes.ok){
+      const data = await tmdbRes.json();
+      return res.status(200).json({genres: data.genres});
+    }
+    else{
+      return res.status(502).json({ message: "Error with TMDB fetch" });
+    }
+  }
+  catch(err){
+    return res.status(500).json({message: err});
+  }
+}
+export async function discover(req, res){
+  const params = new URLSearchParams(req.query);
+  try{
+    const tmdbRes = await fetch(
+      `${process.env.TMDB_BASE_URL}/discover/movie?${params.toString()}`,
+      {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization: "Bearer " + process.env.TMDB_KEY,
+        },
+      }
+    ); 
+    if(tmdbRes.ok){
+      const data  = await tmdbRes.json();
+      const movies = data.results.map(trimMovie);
+      return res.status(200).json({movies, currentPage: data.page, totalPages: data.total_pages, totalResults: data.total_results})
+    }
+    else{
+      return res.status(502).json({ message: "Error with TMDB fetch" });
+    }
+  }
+  catch(err){
+    return res.status(500).json({message: err.message});
   }
 }
 function trimMovieDetails(details) {
