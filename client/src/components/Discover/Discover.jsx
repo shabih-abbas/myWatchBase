@@ -10,42 +10,28 @@ export default function Discover() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
-  const [genres, setGenres] = useState([]);
-  const [languages, setLanguages] = useState([]);
+  const [filters, setFilters] = useState(null);
   const { setError } = useError();
   const [searchParams, setSearchParams] = useSearchParams();
   const params = searchParams.toString();
   const page = Number(searchParams.get("page")) || 1;
+  
   useEffect(() => {
-    async function fetchLanguages() {
+    async function fetchFilters() {
       try {
-        const res = await fetch("/api/movies/languages");
+        const res = await fetch("/api/movies/filters");
         const data = await res.json();
         if (res.ok) {
-          setLanguages(data.languages);
+          setFilters(data);
         } else {
           setError(data.message);
         }
       } catch (err) {
-        setError("Error in loading languages");
-      }
-    }
-    async function fetchGenres() {
-      try {
-        const res = await fetch("/api/movies/genres");
-        const data = await res.json();
-        if (res.ok) {
-          setGenres(data.genres);
-        } else {
-          setError(data.message);
-        }
-      } catch (err) {
-        setError("Error in loading genres");
+        setError("Error in loading Filters");
       }
     }
     setError(null);
-    fetchGenres();
-    fetchLanguages();
+    fetchFilters();
   }, []);
   useEffect(() => {
     async function fetchResults(params) {
@@ -83,7 +69,7 @@ export default function Discover() {
           <option disabled value="">
             Language
           </option>
-          {languages.map((lang) => (
+          {filters ? filters.languages.map((lang) => (
             <option
               key={lang.iso_639_1}
               className={styles.option}
@@ -91,7 +77,7 @@ export default function Discover() {
             >
               {lang.english_name}
             </option>
-          ))}
+          )): null}
         </select>
         <select
           className={styles.select}
@@ -102,11 +88,53 @@ export default function Discover() {
           <option disabled value="">
             Genre
           </option>
-          {genres.map((genre) => (
+          {filters ? filters.genres.map((genre) => (
             <option key={genre.id} className={styles.option} value={genre.id}>
               {genre.name}
             </option>
-          ))}
+          )): null}
+        </select>
+        <select className={styles.select} name="rating" id="rating" defaultValue="">
+          <option disabled value="">
+            Rating
+          </option>
+          {filters ? filters.ratings.map((rating) => (
+            <option
+              key={rating.value}
+              className={styles.option}
+              value={rating.value}
+            >
+              {rating.name}
+            </option>
+          )): null}
+        </select>
+        <select className={styles.select} name="release_date" id="release_date" defaultValue="">
+          <option disabled value="">
+            Release Date
+          </option>
+          {filters ? filters.releaseDate.map((date) => (
+            <option
+              key={date.value}
+              className={styles.option}
+              value={date.value}
+            >
+              {date.name}
+            </option>
+          )): null}
+        </select>
+        <select className={styles.select} name="sort" id="sort" defaultValue="">
+          <option disabled value="">
+            Sort
+          </option>
+          {filters ? filters.sort.map((opt) => (
+            <option
+              key={opt.value}
+              className={styles.option}
+              value={opt.value}
+            >
+              {opt.name}
+            </option>
+          )): null}
         </select>
         <button className={styles.submit} type="submit">
           Filter
@@ -141,8 +169,14 @@ export default function Discover() {
     const newParams = { page: 1 };
     const lang = formData.get("lang");
     const genre = formData.get("genre");
+    const rating = formData.get("rating");
+    const releaseDate = formData.get("release_date");
+    const sort = formData.get("sort");
     if (lang) newParams["with_original_language"] = lang;
     if (genre) newParams["with_genres"] = genre;
+    if (sort) newParams["sort_by"] = sort;
+    if (releaseDate) newParams["primary_release_date.gte"] = releaseDate;
+    if (rating) newParams["vote_average.gte"] = rating;
     setSearchParams(newParams);
   }
 }

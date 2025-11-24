@@ -83,7 +83,7 @@ export default function MoviePage() {
                 </li>
                 {movie.externalRatings
                   ? movie.externalRatings.map((rating) => (
-                      <li className={styles.rating}>
+                      <li key={rating.Source} className={styles.rating}>
                         <img
                           src={ratingLogos[rating.Source]}
                           alt={rating.Source}

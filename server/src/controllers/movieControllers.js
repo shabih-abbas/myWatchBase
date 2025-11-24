@@ -22,7 +22,7 @@ export async function trending(req, res) {
       const movies = data.results.map(trimMovie);
       return res.status(200).json({ movies: movies });
     } else {
-      return res.status(502).json({ message: "Error with TMDB fetch" });
+      return res.status(502).json({ message: "Error with TMDB fetch"});
     }
   } catch (err) {
     return res.status(500).json({ message: err.message });
@@ -90,9 +90,26 @@ export async function search(req, res){
     return res.status(500).json({message: err});
   }
 }
-export async function languages(req, res){
+export async function filters(req, res){
+  const filterOptions = {
+    sort: [
+      {name: 'Asc Popularity' , value: 'popularity.asc'},
+      {name: 'Desc Popularity' , value: 'popularity.desc'},
+      {name: 'Asc Release Date' , value: 'primary_release_date.asc'},
+      {name: 'Desc Release Date', value: 'primary_release_date.desc'},
+      {name: 'Asc Rating' , value: 'vote_average.asc'},
+      {name: 'Desc Rating' , value: 'vote_average.desc'},
+      {name: 'Asc Vote Count' , value: 'vote_count.asc'},
+      {name: 'Desc Vote Count' , value: 'vote_count.desc'},
+    ],
+    ratings: Array.from({length: 9}, (_, i) => i+1).map(rating => ({name: '> '+rating, value: rating})),
+    releaseDate: Array.from({length: 10}, (_, i) => (Math.floor(new Date().getFullYear()/10) * 10) - (i*10)).map(year => ({name: '> ' + year, value: year + '-01'+'-01'})),
+    languages: [],
+    genres: [],
+  }
+
   try{
-    const tmdbRes = await fetch(
+    const langRes = await fetch(
       `${process.env.TMDB_BASE_URL}/configuration/languages`,
       {
         method: "GET",
@@ -102,21 +119,7 @@ export async function languages(req, res){
         },
       }
     );
-    if(tmdbRes.ok){
-      const data = await tmdbRes.json();
-      return res.status(200).json({languages: data});
-    }
-    else{
-      return res.status(502).json({ message: "Error with TMDB fetch" });
-    }
-  }
-  catch(err){
-    return res.status(500).json({message: err});
-  }
-}
-export async function genres(req, res){
-  try{
-    const tmdbRes = await fetch(
+    const genreRes = await fetch(
       `${process.env.TMDB_BASE_URL}/genre/movie/list`,
       {
         method: "GET",
@@ -126,18 +129,21 @@ export async function genres(req, res){
         },
       }
     );
-    if(tmdbRes.ok){
-      const data = await tmdbRes.json();
-      return res.status(200).json({genres: data.genres});
+    if(langRes.ok){
+      const data = await langRes.json();
+      filterOptions.languages = data;
     }
-    else{
-      return res.status(502).json({ message: "Error with TMDB fetch" });
+    if(genreRes.ok){
+      const data = await genreRes.json();
+      filterOptions.genres = data.genres;
     }
+    return res.status(200).json(filterOptions);
   }
   catch(err){
     return res.status(500).json({message: err});
   }
 }
+
 export async function discover(req, res){
   const params = new URLSearchParams(req.query);
   try{
