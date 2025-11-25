@@ -32,8 +32,8 @@ export async function login(req, res){
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: '1d'});
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'none',
+            secure: true,
+            sameSite: 'lax',
             maxAge: 24 * 60 * 60 * 1000
         })
         res.json({message: 'Login Success', user: user._id})
@@ -48,17 +48,17 @@ export function authenticate(req, res){
     try{
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         // const user = await User.findById(decoded.id)
-        token = jwt.sign({id : decoded.id}, process.env.JWT_SECRET, {expiresIn: "1d"})
-        res.cookie("token", token, {
+        const newToken = jwt.sign({id : decoded.id}, process.env.JWT_SECRET, {expiresIn: "1d"})
+        res.cookie("token", newToken, {
             httpOnly: true,
-            secure: false,
-            sameSite: 'none',
+            secure: true,
+            sameSite: 'lax',
             maxAge: 24 * 60 * 60 * 1000,
         })
         res.status(200).json({user: decoded.id});
     }
     catch(err){
-        res.status(403).json({message: "Token Expired or Invalid"});
+        res.status(401).json({message: "Token Expired or Invalid" + err.message});
     }
 }
 export function logout(req, res){

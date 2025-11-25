@@ -45,23 +45,25 @@ export default function Search() {
         <h1>{`Results for "${query}"`}</h1>
         <MovieList movies={results} />
       </div>
-      <Pagination
-        isFirst={page <= 1}
-        isLast={page >= totalPages}
-        nextPage={() =>
-          setSearchParams((prev) => {
-            if(page < totalPages){
-              prev.set('page', page + 1);
-            }
+      <div className={styles.pagination}>
+        <Pagination
+          isFirst={page <= 1}
+          isLast={page >= totalPages}
+          nextPage={() =>
+            setSearchParams((prev) => {
+              if(page < totalPages){
+                prev.set('page', page + 1);
+              }
+              return prev;
+            })
+          }
+          prevPage={() => setSearchParams((prev) => {
+            if(page > 1)
+              prev.set('page', page - 1);
             return prev;
-          })
-        }
-        prevPage={() => setSearchParams((prev) => {
-          if(page > 1)
-            prev.set('page', page - 1);
-          return prev;
-        })}
-      />
+          })}
+        />
+      </div>
     </div>
   );
 }
