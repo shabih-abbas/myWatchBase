@@ -1,9 +1,9 @@
-# MyWatchBase 🎬
+# My WatchBase 🎬
 
 ![Project Status](https://img.shields.io/badge/status-active_development-green)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
-**MyWatchBase** is a full-stack movie exploration and tracking application. It serves as a personal companion for movie enthusiasts, allowing users to discover new titles, view comprehensive details, and manage their streaming history through custom collections.
+**My WatchBase** is a full-stack movie exploration and tracking application. It serves as a personal companion for movie enthusiasts, allowing users to discover new titles, view comprehensive details, and manage their streaming history through custom collections.
 
 🔗 **[Live Demo]()**
 
@@ -56,7 +56,7 @@ If you want to run this project locally, follow these steps:
 
 ### 1. Clone the repository
 ```bash
-git clone [https://github.com/your-username/mywatchbase.git](https://github.com/your-username/mywatchbase.git)
+git clone [https://github.com/shabih-abbas/mywatchbase.git](https://github.com/shabih-abbas/mywatchbase.git)
 cd mywatchbase
 ```
 ### 2. Backend Setup
