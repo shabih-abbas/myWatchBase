@@ -1,0 +1,7 @@
+.container{
+    position: relative;
+}
+.collections{
+    position: absolute;
+    max-width: 100%;
+}

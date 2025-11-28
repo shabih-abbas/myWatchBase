@@ -10,7 +10,7 @@ export function Img({ path, alt, className, size }) {
   return (
     <img
       className={className}
-      src={path ? baseImgUrl +'/'+ size + path: fallback}
+      src={path ? baseImgUrl + size + path: fallback}
       alt={alt}
     />
   );

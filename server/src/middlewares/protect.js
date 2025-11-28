@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 export default function protect(req, res, next){
     const token = req.cookies.token;
-    if(!token) return res.status(401).json({message: "unauthorized access"})
+    if(!token) return res.status(401).json({message: "Please login to access this feature"})
     try{
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded.id;

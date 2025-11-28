@@ -4,8 +4,9 @@ import { create, deleteCollection, addMovie, deleteMovie, getCollections } from 
 
 const router = express.Router();
 
-router.get('/collections-list', getCollections);
 router.use(protect);
+
+router.get('/collections-list', getCollections);
 router.post('/create', create);
 router.delete('/delete', deleteCollection);
 router.patch('/add-movie', addMovie);
