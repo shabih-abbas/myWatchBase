@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 export default function protect(req, res, next){
     const token = req.cookies.token;
+    // console.log("in protect")
     if(!token) return res.status(401).json({message: "Please login to access this feature"})
     try{
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -8,6 +9,6 @@ export default function protect(req, res, next){
         next();
     }
     catch(err){
-        return res.status(401).json({message: "Session Expired, Please Login"})
+        return res.status(401).json({message: "Session Expired, Please Login" + err.message})
     }
 }

@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import {Link} from 'react-router';
 import styles from "./AddToCollection.module.css";
 export default function AddToCollection({ movie }) {
   const [collections, setCollections] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [showCollections, setShowCollections] = useState(false);
   const [adding, setAdding] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -14,8 +16,9 @@ export default function AddToCollection({ movie }) {
 
   useEffect(() => {
     async function getCollections() {
+      setLoading(true);
       try {
-        const res = await fetch("/api/collections/collections-list", {
+        const res = await fetch("/api/collections/list", {
           credentials: "include",
         });
         const data = await res.json();
@@ -27,10 +30,12 @@ export default function AddToCollection({ movie }) {
       } catch (err) {
         setErrorMessage("Error in loading collections" + err.message);
       }
+      finally{
+        setLoading(false);
+      }
     }
-    if(showCollections)
-        getCollections();
-  }, [showCollections]);
+    getCollections();
+  }, []);
   return (
     <div className={styles.container}>
       <button
@@ -39,12 +44,12 @@ export default function AddToCollection({ movie }) {
       >
         Add to Collection
       </button>
-      {showCollections ? (
-        <div className="collections">
+      {!loading && showCollections ? (
+        <div className={styles.collections}>
           {errorMessage ? (
             <p className={styles.error}>{errorMessage}</p>
           ) : (
-            <ul>
+            <ul className={styles.collectionList}>
               {collections.map((collection) => {
                 if (alreadyAddedIn.includes(collection._id)) return null;
                 return (
@@ -52,13 +57,14 @@ export default function AddToCollection({ movie }) {
                     <button
                       disabled={adding}
                       className={styles.addBtn}
-                      onClick={() => addMovie(movie.id, collection._id)}
+                      onClick={() => addMovie(movie, collection._id)}
                     >
                       {collection.name}
                     </button>
                   </li>
                 );
               })}
+              <li className={styles.newLink}><Link to='/collections'>Create New Collection</Link></li>
             </ul>
           )}
         </div>
@@ -70,8 +76,11 @@ export default function AddToCollection({ movie }) {
     try {
       const res = await fetch("/api/collections/add-movie", {
         method: "PATCH",
-        body: JSON.stringify({ movie, collection }),
         credentials: "include",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ movie, collection })
       });
       const data = await res.json();
       if (res.ok) {

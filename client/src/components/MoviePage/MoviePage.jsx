@@ -5,6 +5,7 @@ import { formatDate } from "../../utiles";
 import Buffering from "../Buffering/Buffering";
 import MovieCredits from "../MovieCredits/MovieCredits";
 import MovieList from "../MovieList/MovieList";
+import AddToCollection from "../AddToCollection/AddToCollection";
 import styles from "./MoviePage.module.css";
 import imdb from "../../assets/imdb.png";
 import rottenTomatoes from "../../assets/rotten_tomatoes.png";
@@ -93,6 +94,7 @@ export default function MoviePage() {
                     ))
                   : null}
               </ul>
+              <AddToCollection movie={movie} />
             </div>
           </div>
           <MovieCredits

@@ -1,0 +1,190 @@
+.mainHeading{
+    text-align: center;
+}
+.addNew{
+    background-color: #222;
+    width: 15vw;
+    min-width: 150px;
+    max-width: 250px;
+    aspect-ratio: 1/1;
+}
+.addNewBtn{
+    display: flex;
+    background-color: transparent;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: #C0C0C0;
+    cursor: pointer;
+    font-size: 20px;
+    justify-content: center;
+}
+.addIcon{
+    font-size: 90px;
+}
+.form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: stretch; */
+    gap: 15px;
+    /* align-items: center; */
+}
+.input{
+    /* width: 100%; */
+    /* margin: 10px 5px; */
+    padding: 5px;
+    /* border-radius: 5px; */
+    border: none;
+    background-color: #C0C0C0;
+    color: #222;
+    font-size: 15px;
+    text-align: center;
+}
+.input:focus{
+    outline: none;
+}
+.buttons{
+    display: flex;
+    gap: 2px;
+}
+.button{
+    /* margin: 5px; */
+    background-color: #E50914;
+    border: none;
+    color: #C0C0C0;
+    /* justify-self: stretch; */
+    flex-grow: 1;
+    cursor: pointer;
+    font-size: 15px;
+}
+.collections{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+}
+
+.collection{
+    width: 15vw;
+    min-width: 150px;
+    max-width: 250px;
+    aspect-ratio: 1/1;
+    font-size: 25px;
+    border: none;
+    background-color: #E50914;
+    color: #C0C0C0;
+    cursor: pointer;
+}
+.modal{
+    position: relative;
+    z-index: 1000;
+}
+.modalContent{
+    background-color: #222;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: auto;
+}
+.close{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: transparent;
+    border: 2px solid #E50914;
+}
+.close:hover{
+    
+    background-color: #E50914;
+}
+.modalHeading{
+    text-align: center;
+}
+.delete{
+    position: relative;
+    align-self: stretch;
+}
+.deleteBtn{
+    width: 80%;
+    background-color: #E50914;
+    border: none;
+    font-size: 20px;
+    padding: 5px;
+    color: #C0C0C0;
+    font-weight: bold;
+    cursor: pointer;
+    margin: auto;
+    display: block;
+}
+.confirm{
+    position: absolute;
+    bottom: 100%;
+    left: 40%;
+    background-color: #C0C0C0;
+    color: #E50914;
+    padding: 5px;
+}
+.confirmYes{
+    background-color: #E50914
+}
+.confirmNo{
+    background-color: #222;
+}
+.confirmYes, .confirmNo{
+    cursor: pointer;
+    border: none;
+    color: #C0C0C0;
+    width: 50px;
+    margin: 5px;
+    padding: 5px;
+    font-size: 15px;
+}
+.listItem{
+    padding: 10px 20px;
+}
+.movieItem{
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    gap: 10px;
+}
+.movieInfo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #C0C0C0;
+    flex-grow: 1;
+}
+.movieTitle{
+    font-size: 20px;
+    display: inline-flex;
+}
+.poster{
+    width: 50px;
+}
+.movieRemove{
+    background-color: #E50914;
+    border: none;
+    color: #C0C0C0;
+    font-size: 15px;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.movieInfo:hover{
+    background-color: #C0C0C0;
+    color: #222; 
+}

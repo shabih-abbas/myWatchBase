@@ -20,7 +20,7 @@ export default function Collections() {
     async function fetchCollections() {
       setLoading(true);
       try {
-        const res = await fetch("/api/collections/collections-list", {
+        const res = await fetch("/api/collections/list", {
           credentials: "include",
         });
         const data = await res.json();
@@ -30,7 +30,7 @@ export default function Collections() {
           setError(data.message);
         }
       } catch (err) {
-        setError("Error in fetching Collection, please try later");
+        setError("Error in fetching Collection, please try later" + err.message);
         console.error(err.message);
       } finally {
         setLoading(false);
@@ -41,7 +41,7 @@ export default function Collections() {
   if (loading) return <Buffering />;
   return (
     <div className={styles.container}>
-      <h1>My Collections</h1>
+      <h1 className={styles.mainHeading}>My Collections</h1>
       <div className={styles.collections}>
         {collections.map((collection) => (
           <button
@@ -63,29 +63,36 @@ export default function Collections() {
                 required
                 placeholder="Collection Name"
               />
-              <button
-                disabled={isPending}
-                className={styles.button}
-                type="submit"
-              >
-                Add
-              </button>
-              <button
-                disabled={isPending}
-                className={styles.button}
-                onClick={() => setAddingCollection(false)}
-              >
-                Cancel
-              </button>
+              <div className={styles.buttons}>
+                <button
+                  disabled={isPending}
+                  className={styles.button}
+                  type="submit"
+                >
+                  Add
+                </button>
+                <button
+                  disabled={isPending}
+                  className={styles.button}
+                  onClick={() => setAddingCollection(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+              
             </form>
           ) : (
-            <button onClick={() => setAddingCollection(true)}>
-              <MdAdd />
+            <button className={styles.addNewBtn} onClick={() => setAddingCollection(true)}>
+              <MdAdd className={styles.addIcon} />
               <span>Add New</span>
             </button>
           )}
         </div>
       </div>
+      <CollectionModal collection={selected} closeModal={() => setSelected(null)} updateCollections={updated => {
+        setCollections(updated);
+        setSelected(updated.find(collection => collection._id == selected._id));
+        }} />
     </div>
   );
   async function createCollection(prevState, formData) {
@@ -93,12 +100,15 @@ export default function Collections() {
     try {
       const res = await fetch("/api/collections/create", {
         method: "POST",
-        body: JSON.stringify({ name }),
         credentials: "include",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name }),
       });
       const data = await res.json();
       if (res.ok) {
-        setCollections(data.Collections);
+        setCollections(data.collections);
         return { success: true };
       } else {
         setError(data.message);
@@ -123,25 +133,30 @@ function CollectionModal({ collection, closeModal, updateCollections }) {
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         <button className={styles.close} onClick={closeModal}>
-          <AiOutlineClose />
+          <AiOutlineClose className={styles.closeIcon} />
         </button>
-        <h1>{collection.name}</h1>
-        <ol>
+        <h1 className={styles.modalHeading}>{collection.name}</h1>
+        <ol className={styles.movieList}>
           {collection.movies.map((movie) => (
-            <li key={movie.id}>
-              <Link to={`/movie/${movie.id}`}>
-                <Img
-                  src={movie.poster}
-                  alt={movie.title}
-                  size="w185"
-                  className={styles.poster}
-                />
-                <h2>{movie.title}</h2>
+            <li className={styles.listItem} key={movie.id}>
+              <div className={styles.movieItem}>
+                <Link className={styles.movieInfo} to={`/movie/${movie.id}`}>
+                  
+                    <Img
+                      path={movie.poster}
+                      alt={movie.title}
+                      size="w92"
+                      className={styles.poster}
+                    />
+                    <h2 className={styles.movieTitle}>{movie.title}</h2>
+                  </Link>  
                 <button
+                  className={styles.movieRemove}
                   disabled={removing}
                   onClick={() => removeMovie(movie.id, collection._id)}
-                ></button>
-              </Link>
+                >Remove</button>
+              
+              </div>
             </li>
           ))}
         </ol>
@@ -169,8 +184,11 @@ function CollectionModal({ collection, closeModal, updateCollections }) {
     try {
       const res = await fetch("/api/collections/delete-movie", {
         method: "PATCH",
-        body: JSON.stringify({ movie, collection }),
         credentials: "include",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ movie, collection }),
       });
       const data = await res.json();
       if (res.ok) {
@@ -184,12 +202,11 @@ function CollectionModal({ collection, closeModal, updateCollections }) {
       setRemoving(false);
     }
   }
-  async function deleteCollection(collection){
+  async function deleteCollection(collectionId){
     setDeleting(true);
     try{
-      const res = await fetch("/api/collections/delete", {
+      const res = await fetch("/api/collections/delete/" + collectionId, {
         method: "DELETE",
-        body: JSON.stringify({collection}),
         credentials: 'include'
       });
       const data = await res.json();

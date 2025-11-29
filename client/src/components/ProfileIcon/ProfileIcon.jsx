@@ -4,12 +4,13 @@ import { PiSignOut } from "react-icons/pi";
 import { PiSignIn } from 'react-icons/pi';
 import styles from "./ProfileIcon.module.css";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useLoading } from "../Providers/LoadingProvider";
 import { useError } from "../Providers/ErrorProvider";
 import { useAuth } from "../Providers/AuthProvider";
 
 export default function ProfileIcon() {
+  const Navigate = useNavigate();
   const { user, setUser } = useAuth();
   const { setLoading } = useLoading();
   const { setError } = useError();
@@ -24,6 +25,10 @@ export default function ProfileIcon() {
       });
       if (res.ok) {
         setUser(null);
+        Navigate("/");
+      } else {
+        const data = await res.json();
+        setError(data.message);
       }
     } catch (err) {
       setError("Could not perform logout, please try later.");

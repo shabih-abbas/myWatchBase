@@ -12,6 +12,7 @@ import Register from '../Register/Register';
 import MoviePage from '../MoviePage/MoviePage';
 import Search from '../Search/Search';
 import Discover from '../Discover/Discover';
+import Collections from '../Collections/Collections';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
                   <Route path='/movie/:id' element={<MoviePage />}/>
                   <Route path='/search' element={<Search />}/>
                   <Route path='/discover' element={<Discover />}/>
+                  <Route path='/collections' element={<Collections />}/>
                 </Route>
                 <Route element={<LoginLayout />}>
                   <Route path='/login' element={<Login />}/>

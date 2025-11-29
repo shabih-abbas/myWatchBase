@@ -1,4 +1,4 @@
-import { trimMovie, trimMovieDetails } from "../utiles";
+import { trimMovie, trimMovieDetails } from "../utiles.js";
 const tmdbOptions = {
   method: "GET",
   headers: {
@@ -23,7 +23,7 @@ export async function trending(req, res) {
       const movies = data.results.map(trimMovie);
       return res.status(200).json({ movies: movies });
     } else {
-      return res.status(502).json({ message: "Error with TMDB fetch"});
+      return res.status(502).json({ message: "Error with TMDB fetch" });
     }
   } catch (err) {
     return res.status(500).json({ message: err.message });
@@ -65,11 +65,13 @@ export async function movie(req, res) {
     return res.status(500).json({ message: err.message });
   }
 }
-export async function search(req, res){
-  const {query, page} = req.query;
-  try{
+export async function search(req, res) {
+  const { query, page } = req.query;
+  try {
     const tmdbRes = await fetch(
-      `${process.env.TMDB_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&page=${page}`,
+      `${process.env.TMDB_BASE_URL}/search/movie?query=${encodeURIComponent(
+        query
+      )}&page=${page}`,
       {
         method: "GET",
         headers: {
@@ -78,38 +80,44 @@ export async function search(req, res){
         },
       }
     );
-    if (tmdbRes.ok){
+    if (tmdbRes.ok) {
       const data = await tmdbRes.json();
       const movies = data.results.map(trimMovie);
-      return res.status(200).json({movies, currentPage: data.page, totalPages: data.total_pages});
-    }
-    else{
+      return res
+        .status(200)
+        .json({ movies, currentPage: data.page, totalPages: data.total_pages });
+    } else {
       return res.status(502).json({ message: "Error with TMDB fetch" });
     }
-  }
-  catch(err){
-    return res.status(500).json({message: err});
+  } catch (err) {
+    return res.status(500).json({ message: err });
   }
 }
-export async function filters(req, res){
+export async function filters(req, res) {
   const filterOptions = {
     sort: [
-      {name: 'Asc Popularity' , value: 'popularity.asc'},
-      {name: 'Desc Popularity' , value: 'popularity.desc'},
-      {name: 'Asc Release Date' , value: 'primary_release_date.asc'},
-      {name: 'Desc Release Date', value: 'primary_release_date.desc'},
-      {name: 'Asc Rating' , value: 'vote_average.asc'},
-      {name: 'Desc Rating' , value: 'vote_average.desc'},
-      {name: 'Asc Vote Count' , value: 'vote_count.asc'},
-      {name: 'Desc Vote Count' , value: 'vote_count.desc'},
+      { name: "Asc Popularity", value: "popularity.asc" },
+      { name: "Desc Popularity", value: "popularity.desc" },
+      { name: "Asc Release Date", value: "primary_release_date.asc" },
+      { name: "Desc Release Date", value: "primary_release_date.desc" },
+      { name: "Asc Rating", value: "vote_average.asc" },
+      { name: "Desc Rating", value: "vote_average.desc" },
+      { name: "Asc Vote Count", value: "vote_count.asc" },
+      { name: "Desc Vote Count", value: "vote_count.desc" },
     ],
-    ratings: Array.from({length: 9}, (_, i) => i+1).map(rating => ({name: '> '+rating, value: rating})),
-    releaseDate: Array.from({length: 10}, (_, i) => (Math.floor(new Date().getFullYear()/10) * 10) - (i*10)).map(year => ({name: '> ' + year, value: year + '-01'+'-01'})),
+    ratings: Array.from({ length: 9 }, (_, i) => i + 1).map((rating) => ({
+      name: "> " + rating,
+      value: rating,
+    })),
+    releaseDate: Array.from(
+      { length: 10 },
+      (_, i) => Math.floor(new Date().getFullYear() / 10) * 10 - i * 10
+    ).map((year) => ({ name: "> " + year, value: year + "-01" + "-01" })),
     languages: [],
     genres: [],
-  }
+  };
 
-  try{
+  try {
     const langRes = await fetch(
       `${process.env.TMDB_BASE_URL}/configuration/languages`,
       {
@@ -130,24 +138,23 @@ export async function filters(req, res){
         },
       }
     );
-    if(langRes.ok){
+    if (langRes.ok) {
       const data = await langRes.json();
       filterOptions.languages = data;
     }
-    if(genreRes.ok){
+    if (genreRes.ok) {
       const data = await genreRes.json();
       filterOptions.genres = data.genres;
     }
     return res.status(200).json(filterOptions);
-  }
-  catch(err){
-    return res.status(500).json({message: err});
+  } catch (err) {
+    return res.status(500).json({ message: err });
   }
 }
 
-export async function discover(req, res){
+export async function discover(req, res) {
   const params = new URLSearchParams(req.query);
-  try{
+  try {
     const tmdbRes = await fetch(
       `${process.env.TMDB_BASE_URL}/discover/movie?${params.toString()}`,
       {
@@ -157,17 +164,22 @@ export async function discover(req, res){
           Authorization: "Bearer " + process.env.TMDB_KEY,
         },
       }
-    ); 
-    if(tmdbRes.ok){
-      const data  = await tmdbRes.json();
+    );
+    if (tmdbRes.ok) {
+      const data = await tmdbRes.json();
       const movies = data.results.map(trimMovie);
-      return res.status(200).json({movies, currentPage: data.page, totalPages: data.total_pages, totalResults: data.total_results})
-    }
-    else{
+      return res
+        .status(200)
+        .json({
+          movies,
+          currentPage: data.page,
+          totalPages: data.total_pages,
+          totalResults: data.total_results,
+        });
+    } else {
       return res.status(502).json({ message: "Error with TMDB fetch" });
     }
-  }
-  catch(err){
-    return res.status(500).json({message: err.message});
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
 }

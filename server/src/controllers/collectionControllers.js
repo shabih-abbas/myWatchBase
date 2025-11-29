@@ -1,7 +1,10 @@
 import { trimMovie } from "../utiles.js";
 import User from "../models/User.js";
 export async function create(req, res) {
-  const { name, user } = req.body;
+  const { user } = req;
+  console.log(req.body);
+  const { name } = req.body;
+  
   try {
     const updatedUser = await User.findByIdAndUpdate(
       user,
@@ -15,18 +18,21 @@ export async function create(req, res) {
       },
       { new: true }
     );
-    if (updatedUser)
+    if (updatedUser){
+      console.log(updatedUser);
       return res.status(201).json({
         collections: updatedUser.collections,
         message: "Collection Created",
       });
+    }
     else return res.status(404).json({ message: "User Not Found" });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 }
 export async function deleteCollection(req, res) {
-  const { collection, user } = req.body;
+  const { user } = req;
+  const { collection } = req.params;
   try {
     const updatedUser = await User.findByIdAndUpdate(
       user,
@@ -40,9 +46,9 @@ export async function deleteCollection(req, res) {
       { new: true }
     );
     if (updatedUser)
-      return res.status(204).json({
+      return res.status(200).json({
         collections: updatedUser.collections,
-        message: "Collection Deleted",
+        message: "Collection Deleted"
       });
     else return res.status(404).json({ message: "User Not Found" });
   } catch (err) {
@@ -50,13 +56,17 @@ export async function deleteCollection(req, res) {
   }
 }
 export async function addMovie(req, res) {
-  const { collection, movie, user } = req.body;
+  const { user } = req;
+  const { collection, movie } = req.body;
+  const {id, title, poster, rating, releaseDate} = movie;
+  const trimmedMovie = {id, title, poster, rating, releaseDate};
+  console.log(trimmedMovie);
   try {
     const updatedUser = await User.findOneAndUpdate(
       { _id: user, "collections._id": collection },
       {
         $push: {
-          "collections.$.movies": trimMovie(movie),
+          "collections.$.movies": trimmedMovie,
         },
       },
       { new: true, runValidators: true }
@@ -72,7 +82,8 @@ export async function addMovie(req, res) {
   }
 }
 export async function deleteMovie(req, res) {
-  const { collection, movie, user } = req.body;
+  const { user } = req;
+  const { collection, movie } = req.body;
   try {
     const updatedUser = await User.findOneAndUpdate(
       { _id: user, "collections._id": collection },
@@ -85,7 +96,7 @@ export async function deleteMovie(req, res) {
     );
     if (updatedUser)
       return res
-        .status(204)
+        .status(200)
         .json({
           collections: updatedUser.collections,
           message: "Movie Deleted",
@@ -96,11 +107,11 @@ export async function deleteMovie(req, res) {
   }
 }
 export async function getCollections(req, res) {
-  const { userId } = req.body;
+  const { user } = req;
   try {
-    const user = User.findById(userId);
-    if (!user) return res.status(404).json({ message: "User Not Found" });
-    return res.status(200).json({ collections: user.collections });
+    const found = await User.findById(user);
+    if (!found) return res.status(404).json({ message: "User Not Found" });
+    return res.status(200).json({ collections: found.collections });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }

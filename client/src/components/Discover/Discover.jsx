@@ -66,7 +66,7 @@ export default function Discover() {
         }}
       >
         <select className={styles.select} name="lang" id="lang" defaultValue="">
-          <option disabled value="">
+          <option className={styles.default} value="">
             Language
           </option>
           {filters ? filters.languages.map((lang) => (
@@ -85,7 +85,7 @@ export default function Discover() {
           id="genre"
           defaultValue=""
         >
-          <option disabled value="">
+          <option className={styles.default} value="">
             Genre
           </option>
           {filters ? filters.genres.map((genre) => (
@@ -95,7 +95,7 @@ export default function Discover() {
           )): null}
         </select>
         <select className={styles.select} name="rating" id="rating" defaultValue="">
-          <option disabled value="">
+          <option className={styles.default} value="">
             Rating
           </option>
           {filters ? filters.ratings.map((rating) => (
@@ -109,7 +109,7 @@ export default function Discover() {
           )): null}
         </select>
         <select className={styles.select} name="release_date" id="release_date" defaultValue="">
-          <option disabled value="">
+          <option className={styles.default} value="">
             Release Date
           </option>
           {filters ? filters.releaseDate.map((date) => (
@@ -123,7 +123,7 @@ export default function Discover() {
           )): null}
         </select>
         <select className={styles.select} name="sort" id="sort" defaultValue="">
-          <option disabled value="">
+          <option className={styles.default} value="">
             Sort
           </option>
           {filters ? filters.sort.map((opt) => (

@@ -6,9 +6,9 @@ const router = express.Router();
 
 router.use(protect);
 
-router.get('/collections-list', getCollections);
+router.get('/list', getCollections);
 router.post('/create', create);
-router.delete('/delete', deleteCollection);
+router.delete('/delete/:collection', deleteCollection);
 router.patch('/add-movie', addMovie);
 router.patch('/delete-movie', deleteMovie);
 
