@@ -1,8 +1,6 @@
-import { trimMovie } from "../utiles.js";
 import User from "../models/User.js";
 export async function create(req, res) {
   const { user } = req;
-  console.log(req.body);
   const { name } = req.body;
   
   try {
@@ -19,7 +17,6 @@ export async function create(req, res) {
       { new: true }
     );
     if (updatedUser){
-      console.log(updatedUser);
       return res.status(201).json({
         collections: updatedUser.collections,
         message: "Collection Created",
@@ -60,7 +57,6 @@ export async function addMovie(req, res) {
   const { collection, movie } = req.body;
   const {id, title, poster, rating, releaseDate} = movie;
   const trimmedMovie = {id, title, poster, rating, releaseDate};
-  console.log(trimmedMovie);
   try {
     const updatedUser = await User.findOneAndUpdate(
       { _id: user, "collections._id": collection },

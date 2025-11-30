@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router";
 import { useLoading } from "../Providers/LoadingProvider";
 import { useError } from "../Providers/ErrorProvider";
 import { useAuth } from "../Providers/AuthProvider";
-
+import Tooltip from "../Tooltip/Tooltip";
 export default function ProfileIcon() {
   const Navigate = useNavigate();
   const { user, setUser } = useAuth();
@@ -38,28 +38,36 @@ export default function ProfileIcon() {
     }
   }
   return user == null ? (
-    <Link className={styles.link} to="/login" aria-label="login">
-      <PiSignIn className={styles.icon} />
-    </Link>
+    <Tooltip label="Login">
+      <Link className={styles.link} to="/login" aria-label="login">
+        <PiSignIn className={styles.icon} />
+      </Link>
+    </Tooltip>
   ) : (
     <div className={styles.container}>
-      <button
-        className={styles.profile}
-        onClick={() => setActive((prev) => !prev)}
-      >
-        <FaRegUser className={styles.icon} />
-      </button>
+       <Tooltip label="My Profile">
+        <button
+          className={styles.profile}
+          onClick={() => setActive((prev) => !prev)}
+        >
+          <FaRegUser className={styles.icon} />
+        </button>
+      </Tooltip>
       {active ? (
         <ul className={styles.dropdown}>
           <li>
-            <Link className={styles.link} aria-label="My collections" to="/collections">
-              <BiCollection className={styles.icon} />
-            </Link>
+            <Tooltip label="My Collections">
+              <Link className={styles.link} aria-label="My collections" to="/collections">
+                <BiCollection className={styles.icon} />
+              </Link>
+            </Tooltip>
           </li>
           <li>
-            <button aria-label="Logout" onClick={() => logout()}>
-              <PiSignOut className={styles.icon} />
-            </button>
+            <Tooltip label="Logout">
+              <button aria-label="Logout" onClick={() => logout()}>
+                <PiSignOut className={styles.icon} />
+              </button>
+            </Tooltip>
           </li>
         </ul>
       ) : null}

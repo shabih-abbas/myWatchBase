@@ -1,4 +1,5 @@
 import styles from './Login.module.css'
+import { useState } from 'react';
 import { Link } from 'react-router'
 import { useNavigate } from 'react-router';
 import { useAuth } from '../Providers/AuthProvider';
@@ -9,6 +10,7 @@ export default function Login(){
     const {setUser} = useAuth();
     const {setLoading} = useLoading();
     const {setError} = useError();
+    const [showPassword, setShowPassword] = useState(false);
     const Navigate = useNavigate();
     async function login(email, password){
         setLoading(true);
@@ -50,7 +52,11 @@ export default function Login(){
                 <label htmlFor="email">Email</label>
                 <input name="email" id="email" type="email" required/>
                 <label htmlFor="password">Password</label>
-                <input name='password' id="password" type="password" required/>
+                <input name='password' id="password" type={showPassword ? "text" : "password"} required/>
+                <div className={styles.showPassword}>
+                    <input className={styles.checkbox} type="checkbox" id="showPassword" onClick={() => setShowPassword((prev) => !prev)}/>
+                    <label htmlFor="showPassword">Show Password</label>
+                </div>
                 <button type='submit'>Login</button>
             </form>
             <Link to='/register'>or create a new account</Link>

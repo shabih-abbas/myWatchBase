@@ -6,8 +6,8 @@
     position: absolute;
     max-width: 100%;
     margin-top: 5px;
-    background-color: #C0C0C0;
-    padding: 5px;
+    /* background-color: #C0C0C0; */
+    padding: 0;
 }
 .error{
     color: #E50914;
@@ -16,30 +16,35 @@
     color: #C0C0C0;
     text-decoration: none;
     background-color: #E50914;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     padding: 2px;
     font-size: 12px;
+    margin: 0;
 }
 .collectionList{
     list-style-type: none;
-    padding: 0;
+    padding: 0px;
+    margin: 0px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
+    align-items: stretch;
     gap: 3px;
 }
 .collection{
-    flex-grow: 1;
+    padding: 0;
+    margin: 0;
 }
 .collection button{
     width: 100%;
     color: #C0C0C0;
     background-color: #222;
     border: none;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     padding: 5px;
     font-size: 15px;
     cursor: pointer;
+    margin: 0;
 }
 .mainBtn{
     background-color: #E50914;

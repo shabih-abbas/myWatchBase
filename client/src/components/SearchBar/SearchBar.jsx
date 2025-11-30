@@ -14,6 +14,7 @@ export default function SearchBar() {
         type="text"
         name="query"
         className={styles.input}
+        placeholder="Search Movies"
       />
       <button
         className={styles.submit}

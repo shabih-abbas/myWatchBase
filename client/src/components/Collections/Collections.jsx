@@ -89,10 +89,12 @@ export default function Collections() {
           )}
         </div>
       </div>
-      <CollectionModal collection={selected} closeModal={() => setSelected(null)} updateCollections={updated => {
-        setCollections(updated);
-        setSelected(updated.find(collection => collection._id == selected._id));
-        }} />
+      {selected ?
+        <CollectionModal collection={selected} closeModal={() => setSelected(null)} updateCollections={updated => {
+          setCollections(updated);
+          setSelected(updated.find(collection => collection._id == selected._id));
+          }} />
+      : null}
     </div>
   );
   async function createCollection(prevState, formData) {
@@ -128,7 +130,6 @@ function CollectionModal({ collection, closeModal, updateCollections }) {
   const [removing, setRemoving] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  if (!collection) return null;
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
@@ -136,6 +137,9 @@ function CollectionModal({ collection, closeModal, updateCollections }) {
           <AiOutlineClose className={styles.closeIcon} />
         </button>
         <h1 className={styles.modalHeading}>{collection.name}</h1>
+        {collection.movies.length == 0 ? (
+          <p className={styles.noMovies}>No movies in this collection</p>
+        ) : null}
         <ol className={styles.movieList}>
           {collection.movies.map((movie) => (
             <li className={styles.listItem} key={movie.id}>

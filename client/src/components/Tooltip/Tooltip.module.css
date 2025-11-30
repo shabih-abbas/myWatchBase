@@ -1,0 +1,22 @@
+.container{
+    position: relative;
+    overflow: visible;
+    
+}
+.tooltip{
+    position: absolute;
+    bottom: 105%;
+    margin: 0;
+    background-color: #C0C0C0;
+    color: #222;
+    border-radius: 5px;
+    font-size: 10px;
+    white-space: nowrap;
+    padding: 3px;
+    
+}
+@media screen and (max-width: 768px){
+    .tooltip{
+        display: none;
+    }
+}
