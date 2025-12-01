@@ -39,7 +39,52 @@ header.mainLayout {
     text-decoration: none;
     transform: scale(120%);
 } */
+.footer{
+    background-color: #222;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 20px;
+    margin-top: 10px;
+    gap: 10px;
+}
+.footerLogo{
+    width: 20vw;
+    max-width: 400px;
+    min-width: 200px;
+    margin-bottom: 10px;
+}
+.footerLinks{
+    display: flex;
+    /* flex-direction: column; */
+    gap: 10px;
+    
+}
+.footerLinks a{
+    color: #C0C0C0;
 
+}
+.footerLinks a{
+    text-decoration: none;
+}
+.attributions p{
+    margin: 5px;
+}
+.tmdbText{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.tmdb{
+    width: 50px;
+    vertical-align: center;
+}
+address a{
+    color: #C0C0C0;
+    text-decoration: underline;
+
+}
 @media screen and (min-width: 768px) {
     .mainLayout nav{
         justify-content: space-between;

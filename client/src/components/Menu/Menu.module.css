@@ -4,8 +4,50 @@
     gap: 10px;
     max-width: 400px;
 }
+
 .explore{
     text-decoration: none;
     padding: 0;
     margin: 0;
+}
+.lg{
+    display: none;
+}
+.sm{
+    position: relative;
+}
+.dropdown{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    right: 0px;
+    gap: 5px;
+    margin-top: 10px;
+    
+}
+.link{
+    text-decoration: none;
+    color: #C0C0C0;
+    background-color: #222;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+}
+.logout{
+    border: none;
+    color: #C0C0C0;
+    background-color: #222;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+}
+@media screen and (min-width: 768px){
+    .sm{
+        display: none;
+    }
+    .lg{
+        display: flex;
+        gap: 5px;
+    }
 }
