@@ -11,11 +11,15 @@ dotenv.config();
 connectDB();
 
 const app = express();
+app.set('trust proxy', 1);
+const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-}));
+    origin: process.env.FRONTEND_URL || "http://localhost:3000", 
+    credentials: true, 
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  }));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -23,4 +27,4 @@ app.use("/api/auth", authRoutes);
 app.use("/api/movies", movieRoutes);
 app.use("/api/collections", collectionRoutes);
 
-app.listen(5000, ()=> console.log("server up"));
+app.listen(PORT, ()=> console.log("server up"));

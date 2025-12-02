@@ -32,10 +32,10 @@ export async function login(req, res){
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: '1d'});
         res.cookie("token", token, {
             httpOnly: true,
-            secure: true,
-            sameSite: 'lax',
-            maxAge: 24 * 60 * 60 * 1000
-        })
+            secure: process.env.NODE_ENV === 'production', 
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
+            maxAge: 24 * 60 * 60 * 1000 
+          })
         res.json({message: 'Login Success', user: user._id})
     }
     catch(err){
@@ -51,10 +51,10 @@ export function authenticate(req, res){
         const newToken = jwt.sign({id : decoded.id}, process.env.JWT_SECRET, {expiresIn: "1d"})
         res.cookie("token", newToken, {
             httpOnly: true,
-            secure: true,
-            sameSite: 'lax',
-            maxAge: 24 * 60 * 60 * 1000,
-        })
+            secure: process.env.NODE_ENV === 'production', 
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
+            maxAge: 24 * 60 * 60 * 1000 
+          })
         res.status(200).json({user: decoded.id});
     }
     catch(err){

@@ -27,7 +27,7 @@ export default function Menu(){
                 <ProfileIcon />
             </div>
             <div className={styles.sm}>
-                <TiThMenu onClick={() => setShow((prev) => !prev)} className={styles.icon} />
+                <TiThMenu onClick={() => setShow((prev) => !prev)} className={styles.icon} aria-label='show menu' />
                 {show ? (
                     <div className={styles.dropdown}>
                         <Link to='/discover' className={styles.link}>Discover</Link>
