@@ -38,8 +38,6 @@
 | :---: | :---: | :---: | :---: | :---: |
 | ![Home Page](./screenshots/home_page.png) | ![Movie Page](./screenshots/movie_page.png) | ![Discover Page](./screenshots/discover.png) | ![Collections](./screenshots/collections.png) | ![Collection Modal](./screenshots/collection_modal.png) |
 
-## 🔗 Links
-
 ## 🏗 Architecture
 
 MyWatchBase utilizes a decoupled **Client-Server** architecture:
