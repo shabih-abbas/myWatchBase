@@ -5,7 +5,7 @@
 
 **My WatchBase** is a full-stack movie exploration and tracking application. It serves as a personal companion for movie enthusiasts, allowing users to discover new titles, view comprehensive details, and manage their streaming history through custom collections.
 
-🔗 **[Live Demo]()**
+🔗 **[Live Demo](https://my-watch-base.vercel.app/)**
 
 ## 🚀 Features
 
