@@ -62,6 +62,7 @@ export default function Collections() {
                 className={styles.input}
                 required
                 placeholder="Collection Name"
+                maxLength="50"
               />
               <div className={styles.buttons}>
                 <button
@@ -141,9 +142,10 @@ function CollectionModal({ collection, closeModal, updateCollections }) {
           <p className={styles.noMovies}>No movies in this collection</p>
         ) : null}
         <ol className={styles.movieList}>
-          {collection.movies.map((movie) => (
+          {collection.movies.map((movie, index) => (
             <li className={styles.listItem} key={movie.id}>
               <div className={styles.movieItem}>
+                <p className={styles.index}>{index + 1}</p>
                 <Link className={styles.movieInfo} to={`/movie/${movie.id}`}>
                   
                     <Img

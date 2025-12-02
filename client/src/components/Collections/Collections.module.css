@@ -1,3 +1,6 @@
+.container{
+    padding: 10px;
+}
 .mainHeading{
     text-align: center;
 }
@@ -71,7 +74,7 @@
 .collections{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     gap: 20px;
 }
 
@@ -85,6 +88,7 @@
     background-color: #E50914;
     color: #C0C0C0;
     cursor: pointer;
+    overflow: hidden;
 }
 .modal{
     position: relative;
@@ -135,7 +139,7 @@
 .confirm{
     position: absolute;
     bottom: 100%;
-    left: 40%;
+    left: 25%;
     background-color: #C0C0C0;
     color: #E50914;
     padding: 5px;
@@ -154,6 +158,11 @@
     margin: 5px;
     padding: 5px;
     font-size: 15px;
+}
+.movieList{
+    list-style-type: none;
+    flex-grow: 1;
+    padding: 0;
 }
 .listItem{
     padding: 10px 20px;
@@ -177,7 +186,7 @@
     display: inline-flex;
 }
 .poster{
-    width: 50px;
+    width: 60px;
 }
 .movieRemove{
     background-color: #E50914;

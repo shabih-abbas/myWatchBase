@@ -34,9 +34,11 @@
 
 ## 📸 Screenshots
 
-| Landing Page | Movie Details |
-| :---: | :---: |
-| ![Landing Page](./screenshots/landing-page-placeholder.png) | ![Details](./screenshots/details-placeholder.png) |
+| Home Page | Movie Details | Discover | Collections | Modal |
+| :---: | :---: | :---: | :---: | :---: |
+| ![Home Page](./screenshots/home_page.png) | ![Movie Page](./screenshots/movie_page.png) | ![Discover Page](./screenshots/discover.png) | ![Collections](./screenshots/collections.png) | ![Collection Modal](./screenshots/collection_modal.png) |
+
+## 🔗 Links
 
 ## 🏗 Architecture
 

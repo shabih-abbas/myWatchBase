@@ -6,14 +6,16 @@ import Menu from '../Menu/Menu';
 
 export default function MainLayout(){
     return (
-        <>
+        <div className={styles.container}>
             <header className= {styles.mainLayout}>
                 <nav>
                     <Link className={styles.logo} to="/"><img src={logo} alt="logo" /></Link>
                     <Menu />
                 </nav>  
             </header>  
-            <Outlet/>
+            <div className={styles.content}>
+                <Outlet/>
+            </div>
             <footer className={styles.footer}>
                 <div className={styles.footerBrand}>
                     <img src={logo} alt="logo" className={styles.footerLogo}/>
@@ -31,6 +33,6 @@ export default function MainLayout(){
                     <p>This is a demonstration project. No personal data is sold or shared. Cookies are used strictly for authentication purposes.</p>
                 </div>
             </footer>
-        </>
+        </div>
     )
 }
