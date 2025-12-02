@@ -61,7 +61,7 @@ export async function addMovie(req, res) {
     const updatedUser = await User.findOneAndUpdate(
       { _id: user, "collections._id": collection },
       {
-        $push: {
+        $addToSet: {
           "collections.$.movies": trimmedMovie,
         },
       },

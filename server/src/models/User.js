@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const movieSchema = new mongoose.Schema({
     _id: false,
-    id: {type: Number, required: true, unique: true},
+    id: {type: Number, required: true},
     title: {type: String, required: true},
     poster: {type: String, default: null},
     releaseDate: {type: String, required: true},
