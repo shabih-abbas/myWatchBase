@@ -75,7 +75,7 @@ export default function AddToCollection({ movie }) {
   async function addMovie(movie, collection) {
     setAdding(true);
     try {
-      const res = await fetch("/api/collections/add-movie", {
+      const res = await fetch(API_URL+"/api/collections/add-movie", {
         method: "PATCH",
         credentials: "include",
         headers: {
