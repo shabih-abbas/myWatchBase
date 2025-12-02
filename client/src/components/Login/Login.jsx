@@ -7,6 +7,7 @@ import { useLoading } from '../Providers/LoadingProvider';
 import { useError } from '../Providers/ErrorProvider';
 
 export default function Login(){
+    const API_URL = import.meta.env.VITE_API_URL || "";
     const {setUser} = useAuth();
     const {setLoading} = useLoading();
     const {setError} = useError();
@@ -16,7 +17,7 @@ export default function Login(){
         setLoading(true);
         setError(null);
         try{
-            const res = await fetch('/api/auth/login', {
+            const res = await fetch(API_URL+'/api/auth/login', {
                 method: "POST",
                 credentials: "include",
                 headers: {

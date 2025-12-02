@@ -4,13 +4,14 @@ import styles from './Home.module.css';
 import MovieList from '../MovieList/MovieList';
 import Buffering from '../Buffering/Buffering';
 export default function Home(){
+    const API_URL = import.meta.env.VITE_API_URL || "";
     const [trending, setTrending] = useState(null);
     const {setError} = useError();
     useEffect(()=>{
         async function fetchTrending(){
             setError(null);
             try{
-                const res = await fetch('/api/movies/trending');
+                const res = await fetch(API_URL+'/api/movies/trending');
                 const data = await res.json();
                 if(res.ok){
                     setTrending(data.movies);

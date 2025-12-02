@@ -13,6 +13,7 @@ import metaCritic from "../../assets/metacritic.png";
 import tmdb from "../../assets/tmdb.png";
 
 export default function MoviePage() {
+  const API_URL = import.meta.env.VITE_API_URL || "";
   const [movie, setMovie] = useState(null);
   const { id } = useParams();
   const { setError } = useError();
@@ -22,7 +23,7 @@ export default function MoviePage() {
       setMovie(null);
       setError(null);
       try {
-        const res = await fetch(`/api/movies/movie?id=${id}`);
+        const res = await fetch(API_URL+`/api/movies/movie?id=${id}`);
         const data = await res.json();
         if (res.ok) {
           setMovie(data.movie);

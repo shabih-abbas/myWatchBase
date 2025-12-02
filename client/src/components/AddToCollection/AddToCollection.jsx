@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import {Link} from 'react-router';
 import styles from "./AddToCollection.module.css";
 export default function AddToCollection({ movie }) {
+  const API_URL = import.meta.env.VITE_API_URL || "";
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCollections, setShowCollections] = useState(false);
@@ -18,7 +19,7 @@ export default function AddToCollection({ movie }) {
     async function getCollections() {
       setLoading(true);
       try {
-        const res = await fetch("/api/collections/list", {
+        const res = await fetch(API_URL+"/api/collections/list", {
           credentials: "include",
         });
         const data = await res.json();

@@ -10,6 +10,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import Tooltip from '../Tooltip/Tooltip';
 import styles from './Menu.module.css';
 export default function Menu(){
+    const API_URL = import.meta.env.VITE_API_URL || "";
     const [show, setShow] = useState(false);
     const {user, setUser} = useAuth();
     const {setLoading} = useLoading();
@@ -50,7 +51,7 @@ export default function Menu(){
         setError(null);
         setLoading(true);
         try {
-          const res = await fetch("/api/auth/logout", {
+          const res = await fetch(API_URL+"/api/auth/logout", {
             method: "POST",
             credentials: "include",
           });

@@ -5,8 +5,6 @@ import StarRating from '../StarRating/StarRating';
 import { Img } from '../../utiles';
 
 export default function Movie({movie}) {
-    const baseImgPath = "https://image.tmdb.org/t/p/w500"
-    
     return (
         <Link to={`/movie/${movie.id}`}>
             <div className={styles.movie}>

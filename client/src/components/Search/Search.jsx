@@ -6,6 +6,7 @@ import MovieList from "../MovieList/MovieList";
 import Pagination from "../Pagination/Pagination";
 import styles from "./Search.module.css";
 export default function Search() {
+  const API_URL = import.meta.env.VITE_API_URL || "";
   const [searchParams, setSearchParams] = useSearchParams();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,7 +21,7 @@ export default function Search() {
       setError(null);
       try {
         const res = await fetch(
-          `/api/movies/search?query=${encodeURIComponent(query)}&page=${page}`
+          API_URL+`/api/movies/search?query=${encodeURIComponent(query)}&page=${page}`
         );
         const data = await res.json();
         if (res.ok) {

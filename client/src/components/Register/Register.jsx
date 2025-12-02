@@ -4,6 +4,7 @@ import {useLoading} from '../Providers/LoadingProvider';
 import {useError} from '../Providers/ErrorProvider';
 import { useState } from 'react';
 export default function Register(){
+    const API_URL = import.meta.env.VITE_API_URL || "";
     const {setLoading} = useLoading();
     const {setError} = useError();
     const [success, setSuccess] = useState(false);
@@ -12,7 +13,7 @@ export default function Register(){
         if(password === confirm){
             setLoading(true);
             try{
-                const res = await fetch('/api/auth/register', {
+                const res = await fetch(API_URL+'/api/auth/register', {
                     method: "POST",
                     credentials: "include",
                     headers: {

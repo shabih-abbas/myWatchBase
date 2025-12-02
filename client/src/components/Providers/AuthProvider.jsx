@@ -4,6 +4,7 @@ import { useLoading } from "./LoadingProvider";
 const AuthContext = createContext();
 
 export function AuthProvider({children}){
+    const API_URL = import.meta.env.VITE_API_URL || "";
     const {setLoading} = useLoading();
     const [user, setUser] = useState(null);
     
@@ -11,7 +12,7 @@ export function AuthProvider({children}){
         async function authenticate(){
             setLoading(true);
             try{
-                const res = await fetch('/api/auth/authenticate', {credentials: 'include'});
+                const res = await fetch(API_URL+'/api/auth/authenticate', {credentials: 'include'});
                 const data = await res.json();
                 if(res.ok){
                     setUser(data.user)

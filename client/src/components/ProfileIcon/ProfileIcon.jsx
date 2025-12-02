@@ -10,6 +10,7 @@ import { useError } from "../Providers/ErrorProvider";
 import { useAuth } from "../Providers/AuthProvider";
 import Tooltip from "../Tooltip/Tooltip";
 export default function ProfileIcon() {
+  const API_URL = import.meta.env.VITE_API_URL || "";
   const Navigate = useNavigate();
   const { user, setUser } = useAuth();
   const { setLoading } = useLoading();
@@ -19,7 +20,7 @@ export default function ProfileIcon() {
     setError(null);
     setLoading(true);
     try {
-      const res = await fetch("/api/auth/logout", {
+      const res = await fetch(API_URL+"/api/auth/logout", {
         method: "POST",
         credentials: "include",
       });

@@ -7,6 +7,7 @@ import { MdAdd } from "react-icons/md";
 import Buffering from "../Buffering/Buffering";
 import styles from "./Collections.module.css";
 export default function Collections() {
+  const API_URL = import.meta.env.VITE_API_URL || "";
   const [collections, setCollections] = useState([]);
   const [selected, setSelected] = useState(null);
   const [addingCollection, setAddingCollection] = useState(false);
@@ -20,7 +21,7 @@ export default function Collections() {
     async function fetchCollections() {
       setLoading(true);
       try {
-        const res = await fetch("/api/collections/list", {
+        const res = await fetch(API_URL+"/api/collections/list", {
           credentials: "include",
         });
         const data = await res.json();
@@ -101,7 +102,7 @@ export default function Collections() {
   async function createCollection(prevState, formData) {
     const name = formData.get("name");
     try {
-      const res = await fetch("/api/collections/create", {
+      const res = await fetch(API_URL+"/api/collections/create", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -127,6 +128,7 @@ export default function Collections() {
 }
 
 function CollectionModal({ collection, closeModal, updateCollections }) {
+  const API_URL = import.meta.env.VITE_API_URL || "";
   const { setError } = useError();
   const [removing, setRemoving] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -188,7 +190,7 @@ function CollectionModal({ collection, closeModal, updateCollections }) {
   async function removeMovie(movie, collection) {
     setRemoving(true);
     try {
-      const res = await fetch("/api/collections/delete-movie", {
+      const res = await fetch(API_URL+"/api/collections/delete-movie", {
         method: "PATCH",
         credentials: "include",
         headers: {
@@ -211,7 +213,7 @@ function CollectionModal({ collection, closeModal, updateCollections }) {
   async function deleteCollection(collectionId){
     setDeleting(true);
     try{
-      const res = await fetch("/api/collections/delete/" + collectionId, {
+      const res = await fetch(API_URL+"/api/collections/delete/" + collectionId, {
         method: "DELETE",
         credentials: 'include'
       });

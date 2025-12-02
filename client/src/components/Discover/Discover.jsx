@@ -7,6 +7,7 @@ import Pagination from "../Pagination/Pagination";
 import styles from "./Discover.module.css";
 
 export default function Discover() {
+  const API_URL = import.meta.env.VITE_API_URL || "";
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
@@ -19,7 +20,7 @@ export default function Discover() {
   useEffect(() => {
     async function fetchFilters() {
       try {
-        const res = await fetch("/api/movies/filters");
+        const res = await fetch(API_URL+"/api/movies/filters");
         const data = await res.json();
         if (res.ok) {
           setFilters(data);
@@ -37,7 +38,7 @@ export default function Discover() {
     async function fetchResults(params) {
       setLoading(true);
       try {
-        const res = await fetch("/api/movies/discover?" + params);
+        const res = await fetch(API_URL+"/api/movies/discover?" + params);
         const data = await res.json();
         if (res.ok) {
           setResults(data.movies);
