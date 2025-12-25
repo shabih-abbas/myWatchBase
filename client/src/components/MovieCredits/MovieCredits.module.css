@@ -3,7 +3,8 @@
     /* width: 100vw; */
 }
 .crewListCtn{
-    /* width: 100%; */
+    width: 80%;
+    margin: auto;
 }
 .crewList{
     list-style-type: none;
@@ -12,8 +13,9 @@
     overflow: auto;
     gap: 10px;
     padding: 0;
-    justify-content: space-around;
-    width: 80%;  
+    /* justify-content: center; */
+    /* width: 80%;   */
+    /* width: min-content; */
     margin: auto;  
 }
 .crewList::-webkit-scrollbar{
@@ -34,6 +36,7 @@
     text-align: center;
     width: 70px;
     align-items: center;
+    flex-grow: 1;
 }
 .profileImg{
     width: 60px;

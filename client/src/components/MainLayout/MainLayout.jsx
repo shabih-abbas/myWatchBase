@@ -24,7 +24,7 @@ export default function MainLayout(){
                 
                     <div className={styles.footerLinks}>
                         <a target="_blank" href="https://github.com/shabih-abbas/myWatchBase">Github</a>
-                        <a target="_blank" href="https://www.linkedin.com/in/shabih-abbas-826b35232/">Linkdin</a>
+                        <a target="_blank" href="https://www.linkedin.com/in/shabih-abbas-826b35232/">Linkedin</a>
                     </div>
                 </div>
                 <div className={styles.attributions}>
