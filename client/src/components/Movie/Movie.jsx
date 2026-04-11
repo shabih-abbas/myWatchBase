@@ -9,7 +9,7 @@ export default function Movie({movie}) {
         <Link to={`/movie/${movie.id}`}>
             <div className={styles.movie}>
                 <div className={styles.posterCtn}>
-                    <Img path={movie.poster} alt={movie.title+ ' poster'} size='w500' />
+                    <Img path={movie.poster} alt={movie.title+ ' poster'} size='w500' height='400px'/>
                 </div>
                 <h3>{movie.title}</h3>
                 <div className={styles.details}>
